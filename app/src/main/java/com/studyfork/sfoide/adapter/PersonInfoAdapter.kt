@@ -7,10 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.studyfork.sfoide.MainActivity
 import com.studyfork.sfoide.R
+import com.studyfork.sfoide.listen
 import java.util.ArrayList
 
 
@@ -20,6 +22,7 @@ class PersonInfoAdapterViewHolder(itemView: View) :
     var tvNameView: TextView = itemView.findViewById(R.id.tv_name)
     var tvPhoneView: TextView = itemView.findViewById(R.id.tv_phone)
     var ivPicture: ImageView = itemView.findViewById(R.id.img_picture)
+
 }
 
 class PersonInfoAdapter(context: Context) : RecyclerView.Adapter<PersonInfoAdapterViewHolder>() {
@@ -30,7 +33,11 @@ class PersonInfoAdapter(context: Context) : RecyclerView.Adapter<PersonInfoAdapt
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PersonInfoAdapterViewHolder {
         val v: View =
             LayoutInflater.from(parent.context).inflate(R.layout.item_person, parent, false)
-        return PersonInfoAdapterViewHolder(v)
+        return PersonInfoAdapterViewHolder(v).listen {
+                position, type ->
+            val item = mItems.get(position)
+            Toast.makeText(adapterContext, "${position}", Toast.LENGTH_LONG).show();
+        }
     }
 
     /**

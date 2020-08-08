@@ -27,22 +27,23 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
 
-        val Storeadapter = PersonInfoAdapter(this@MainActivity)
+        val PersonInfoadapter = PersonInfoAdapter(this@MainActivity)
 
 
         recyclerview.apply {
             layoutManager = LinearLayoutManager( this@MainActivity, RecyclerView.VERTICAL, false)
-            adapter = Storeadapter
+            adapter = PersonInfoadapter
         }
 
         viewModel.apply {
             itemLiveData.observe(this@MainActivity, Observer {
-                Storeadapter.updateItems(it)
+                PersonInfoadapter.updateItems(it)
             })
             loadingLiveData.observe(this@MainActivity, Observer {
                 progressBar.visibility = if(it) View.VISIBLE else View.GONE
             })
         }
+
 
     }
 }
