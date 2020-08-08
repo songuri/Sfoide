@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
 
-        val Storeadapter = PersonInfoAdapter()
+        val Storeadapter = PersonInfoAdapter(this@MainActivity)
 
 
         recyclerview.apply {

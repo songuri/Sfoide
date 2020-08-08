@@ -1,11 +1,15 @@
 package com.studyfork.sfoide.adapter
 
 import Results
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.studyfork.sfoide.MainActivity
 import com.studyfork.sfoide.R
 import java.util.ArrayList
 
@@ -15,9 +19,11 @@ class PersonInfoAdapterViewHolder(itemView: View) :
 
     var tvNameView: TextView = itemView.findViewById(R.id.tv_name)
     var tvPhoneView: TextView = itemView.findViewById(R.id.tv_phone)
+    var ivPicture: ImageView = itemView.findViewById(R.id.img_picture)
 }
 
-class PersonInfoAdapter : RecyclerView.Adapter<PersonInfoAdapterViewHolder>() {
+class PersonInfoAdapter(context: Context) : RecyclerView.Adapter<PersonInfoAdapterViewHolder>() {
+    val adapterContext: Context = context
     private var mItems: List<Results> =
         ArrayList()
 
@@ -36,6 +42,13 @@ class PersonInfoAdapter : RecyclerView.Adapter<PersonInfoAdapterViewHolder>() {
         val result: Results= mItems[position]
         holder.tvNameView.text = result.name.first
         holder.tvPhoneView.text = result.phone
+
+
+
+        var imageUrl: String = result.picture.medium
+        Glide.with(adapterContext)
+            .load(imageUrl)
+            .into(holder.ivPicture)
 //        holder.tvNameView.text = store.name
 //        holder.tvAddressView.text = store.addr
 //        holder.tvDistanceView.text = "1km"

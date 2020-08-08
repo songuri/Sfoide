@@ -39,6 +39,5 @@ class MainViewModel: ViewModel() {
             itemLiveData.value = personInfo.results
             loadingLiveData.value = false
         }
-
     }
 }
